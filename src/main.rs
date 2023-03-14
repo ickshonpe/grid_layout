@@ -51,12 +51,10 @@ fn spawn_layout(mut commands: Commands, asset_server: Res<AssetServer>) {
                 .spawn(NodeBundle {
                     style: Style {
                         display: Display::Grid,
-                        grid_template_columns: vec![
-                            GridTrack::px::<GridTrack>(100.).repeat(alignments.len() as u16)
-                        ],
+                        grid_template_columns: RepeatedGridTrack::px(alignments.len(), 100.),
                         grid_template_rows: vec![
                             GridTrack::auto(),
-                            GridTrack::px::<GridTrack>(80.).repeat(justifications.len() as u16),
+                            RepeatedGridTrack::px(justifications.len(), 80.),
                         ],
                         gap: Size::all(Val::Px(5.)),
                         padding: UiRect::all(Val::Px(10.)),
