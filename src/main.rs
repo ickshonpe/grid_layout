@@ -66,7 +66,7 @@ fn spawn_layout(mut commands: Commands, asset_server: Res<AssetServer>) {
                     ..Default::default()
                 })
                 .with_children(|parent| {
-                    let n = alignments.len() as u16;
+                    let row_len = alignments.len() as u16;
 
                     parent
                         .spawn(NodeBundle {
@@ -78,7 +78,7 @@ fn spawn_layout(mut commands: Commands, asset_server: Res<AssetServer>) {
                                     bottom: Val::Px(1.),
                                     ..Default::default()
                                 },
-                                grid_column: GridPlacement::start(n / 2),
+                                grid_column: GridPlacement::start(row_len / 2),
                                 ..Default::default()
                             },
                             background_color: BackgroundColor(ALIGN_ITEMS_COLOR),
@@ -105,7 +105,7 @@ fn spawn_layout(mut commands: Commands, asset_server: Res<AssetServer>) {
                                     bottom: Val::Px(1.),
                                     ..Default::default()
                                 },
-                                grid_column: GridPlacement::start(1 + n / 2),
+                                grid_column: GridPlacement::start(1 + row_len / 2),
                                 ..Default::default()
                             },
                             background_color: BackgroundColor(JUSTIFY_CONTENT_COLOR),
@@ -125,7 +125,7 @@ fn spawn_layout(mut commands: Commands, asset_server: Res<AssetServer>) {
                     parent.spawn(NodeBundle {
                         style: Style {
                             display: Display::Grid,
-                            grid_column: GridPlacement::span(n - (1 + n / 2)),
+                            grid_column: GridPlacement::span(row_len - (1 + row_len / 2)),
                             ..Default::default()
                         },
                         ..Default::default()
