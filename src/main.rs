@@ -51,12 +51,13 @@ fn spawn_layout(mut commands: Commands, asset_server: Res<AssetServer>) {
                 .spawn(NodeBundle {
                     style: Style {
                         display: Display::Grid,
-                        grid_template_columns: iter::repeat(GridTrack::px(100.))
-                            .take(alignments.len())
-                            .collect(),
-                        grid_template_rows: iter::once(GridTrack::auto())
-                            .chain(iter::repeat(GridTrack::px(80.)).take(justifications.len()))
-                            .collect(),
+                        grid_template_columns: vec![
+                            GridTrack::px::<GridTrack>(100.).repeat(alignments.len() as u16)
+                        ],
+                        grid_template_rows: vec![
+                            GridTrack::auto(),
+                            GridTrack::px::<GridTrack>(80.).repeat(justifications.len() as u16),
+                        ],
                         gap: Size::all(Val::Px(5.)),
                         padding: UiRect::all(Val::Px(10.)),
                         ..Default::default()
@@ -75,10 +76,7 @@ fn spawn_layout(mut commands: Commands, asset_server: Res<AssetServer>) {
                                     bottom: Val::Px(1.),
                                     ..Default::default()
                                 },
-                                grid_column: GridPlacement {
-                                    start: Some(4),
-                                    span: 1,
-                                },
+                                grid_column: GridPlacement::start(4),
                                 ..Default::default()
                             },
                             background_color: BackgroundColor(ALIGN_ITEMS_COLOR),
@@ -105,10 +103,7 @@ fn spawn_layout(mut commands: Commands, asset_server: Res<AssetServer>) {
                                     bottom: Val::Px(1.),
                                     ..Default::default()
                                 },
-                                grid_column: GridPlacement {
-                                    start: Some(5),
-                                    span: 1,
-                                },
+                                grid_column: GridPlacement::start(5),
                                 ..Default::default()
                             },
                             background_color: BackgroundColor(JUSTIFY_CONTENT_COLOR),
@@ -128,10 +123,7 @@ fn spawn_layout(mut commands: Commands, asset_server: Res<AssetServer>) {
                     parent.spawn(NodeBundle {
                         style: Style {
                             display: Display::Grid,
-                            grid_column: GridPlacement {
-                                start: Some(6),
-                                span: 3,
-                            },
+                            grid_column: GridPlacement::span(3),
                             ..Default::default()
                         },
                         ..Default::default()

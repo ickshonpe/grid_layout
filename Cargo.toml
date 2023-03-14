@@ -4,4 +4,4 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-bevy = { github = "https://github.com/nicoburns/bevy", branch = "css-grid"}
+bevy = { git = "https://github.com/nicoburns/bevy", branch = "css-grid"}
